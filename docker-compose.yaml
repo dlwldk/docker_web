@@ -1,0 +1,54 @@
+version: '3.1'
+
+services:
+  #db
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: paybooc
+      POSTGRES_DB: project
+    container_name: db
+    ports:
+      - 5111:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    container_name: adminerApp
+    ports:
+      - 8080:8080 
+
+  #프론트앤드
+  frontend:
+    image: frontend
+    working_dir: /frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: reactApp
+    ports: 
+      - 3200:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  
+  #백엔드 
+  backend:
+    image: backend
+    working_dir: /backend
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: springApp
+    links:
+      - "db:database"
+    ports: 
+      - 8081:8080
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5111/project
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=paybooc
+          

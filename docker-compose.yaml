@@ -54,7 +54,7 @@ services:
     networks:
       - sb-db-ra
     ports: 
-      - 8081:8081
+      - 8081:8080
     command: [“./gradlew”]
     depends_on:
       - db

@@ -10,13 +10,21 @@ services:
       POSTGRES_PASSWORD: paybooc
       POSTGRES_DB: project
     container_name: db
+    #volumes:
+      #- ./postgresql/:/var/lib/postgresql/data/
+    networks:
+      - sb-db-ra
+    expose:
+      - 5112
     ports:
-      - 5111:5432
+      - 5112:5432
 
   adminer:
     image: adminer
     restart: always
-    container_name: adminerApp
+    container_name: adminer
+    networks:
+      - sb-db-ra
     ports:
       - 8080:8080 
 
@@ -27,7 +35,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: reactApp
+    container_name: frontend
+    networks:
+      - sb-db-ra
     ports: 
       - 3200:3000
     environment:
@@ -40,15 +50,18 @@ services:
     build: 
       context: ./backend
       dockerfile: Dockerfile
-    container_name: springApp
-    links:
-      - "db:database"
+    container_name: backend
+    networks:
+      - sb-db-ra
     ports: 
-      - 8081:8080
+      - 8081:8081
+    command: [“./gradlew”]
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5111/project
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/project
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=paybooc
-          
+
+networks:
+  sb-db-ra:

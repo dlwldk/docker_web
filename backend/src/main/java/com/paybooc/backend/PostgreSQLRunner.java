@@ -27,12 +27,12 @@ public class PostgreSQLRunner implements ApplicationRunner {
             System.out.println(connection.getMetaData().getUserName());
 
             Statement statement = connection.createStatement();
-            //String sql = "CREATE TABLE t_product(product_no INTEGER NOT NULL, product_name VARCHAR(255), PRIMARY KEY (product_no))";
-            //statement.executeUpdate(sql);
+            String sql = "CREATE TABLE t_data(count INTEGER)";
+            statement.executeUpdate(sql);
             
-            statement.executeQuery("select count from t_data"); //Example 테이블을 조회
-			System.out.println("Example 테이블을 조회했습니다.");
+            //statement.executeQuery("select count from t_data");
+			//System.out.println("t_data 테이블을 조회했습니다.");
         }
-        //jdbcTemplate.execute("INSERT INTO t_product VALUES (3, 'Big shirt')");
+        jdbcTemplate.execute("INSERT INTO t_data VALUES (0)");
     }
 }

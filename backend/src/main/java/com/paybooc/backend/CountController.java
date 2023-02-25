@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.paybooc.backend.CountService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:90") // 컨트롤러에서 설정
+@CrossOrigin(origins = "http://localhost:3200") // 컨트롤러에서 설정
 public class CountController {
 	
 	@Autowired

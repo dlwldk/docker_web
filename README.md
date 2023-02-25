@@ -1,7 +1,7 @@
 # docker에 spring boot/react/postgresql 띄우기
 
 
-## docker-compose 통해 
+## docker-compose 
 
 docker-compose.yaml service명 및 내용 작성
 

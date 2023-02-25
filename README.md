@@ -16,4 +16,3 @@ docker-compose.yaml 실행
 ### `docker compose down`
 
 docker container 중단 및 삭제
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)

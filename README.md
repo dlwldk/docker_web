@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# docker에 spring boot/react/postgresql 띄우기
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
